@@ -2,15 +2,18 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: user-service-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
+  ingressClassName: nginx
   rules:
-  - host: arch.homework
+  - host: arch.homework 
     http:
       paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: user-service
+            name: userservice
             port:
               number: 80

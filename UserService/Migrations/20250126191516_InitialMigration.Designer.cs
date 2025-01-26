@@ -4,14 +4,14 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using UserService;
+using UserService.Data;
 
 #nullable disable
 
 namespace UserService.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250125161228_InitialMigration")]
+    [Migration("20250126191516_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />

@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using EFCore.NamingConventions;
-using UserService;
+using UserService.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
