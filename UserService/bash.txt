@@ -13,15 +13,13 @@ cd..
 helm install user-db oci://registry-1.docker.io/bitnamicharts/postgresql -f helm/values.yaml
 cd k8s
 
-echo "$(minikube ip) arch.homework" | sudo tee -a /etc/hosts
-
 kubectl apply -f configmap.yaml
 kubectl apply -f secret.yaml
 kubectl apply -f deployment.yaml
 kubectl apply -f service.yaml
 kubectl apply -f ingress.yaml
 
-kubectl port-forward svc/userservice 8000:80
+не нужно: kubectl port-forward svc/userservice 8000:80
 
 sudo apt-get install -y postgresql-client
 kubectl port-forward --namespace default svc/user-db-postgresql 5432:5432
