@@ -24,6 +24,8 @@ kubectl apply -f ingress.yaml
 sudo apt-get install -y postgresql-client
 kubectl port-forward --namespace default svc/user-db-postgresql 5432:5432
 
+minikube tunnel
+
 Дополнительно:
 Нужно указать в system32/drivers/etc/hosts
 127.0.0.1 arch.homework 
