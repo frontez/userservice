@@ -1,0 +1,14 @@
+minikube start
+
+helm install user-db oci://registry-1.docker.io/bitnamicharts/postgresql -f helm/values.yaml
+
+sudo apt-get install -y postgresql-client
+kubectl port-forward --namespace default svc/user-db-postgresql 5432:5432 &
+psql -U sa -p 5432 -h 127.0.0.1 -d UserService
+
+dotnet build
+
+dotnet ef migrations add InitialMigration
+dotnet ef database update
+
+dotnet run
