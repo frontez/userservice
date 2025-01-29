@@ -1,0 +1,199 @@
+{
+    "apiVersion": 1,
+    "groups": [
+        {
+            "orgId": 1,
+            "name": "err5xx",
+            "folder": "alerts",
+            "interval": "1m",
+            "rules": [
+                {
+                    "uid": "bebhh2wv0hudce",
+                    "title": "Error Rate (5xx Responses)",
+                    "condition": "B",
+                    "data": [
+                        {
+                            "refId": "F",
+                            "relativeTimeRange": {
+                                "from": 21600,
+                                "to": 0
+                            },
+                            "datasourceUid": "debaaeilqmxa8f",
+                            "model": {
+                                "adhocFilters": [],
+                                "datasource": {
+                                    "type": "prometheus",
+                                    "uid": "debaaeilqmxa8f"
+                                },
+                                "editorMode": "code",
+                                "expr": "sum(rate(nginx_ingress_controller_requests{status=~\"5..\"}[1m])) by (ingress)",
+                                "format": "time_series",
+                                "instant": false,
+                                "interval": "",
+                                "intervalFactor": 2,
+                                "intervalMs": 15000,
+                                "maxDataPoints": 43200,
+                                "range": true,
+                                "refId": "F"
+                            }
+                        },
+                        {
+                            "refId": "B",
+                            "relativeTimeRange": {
+                                "from": 0,
+                                "to": 0
+                            },
+                            "datasourceUid": "__expr__",
+                            "model": {
+                                "conditions": [
+                                    {
+                                        "evaluator": {
+                                            "params": [
+                                                0.1,
+                                                0
+                                            ],
+                                            "type": "gt"
+                                        },
+                                        "operator": {
+                                            "type": "when"
+                                        },
+                                        "query": {
+                                            "params": [
+                                                "F"
+                                            ]
+                                        },
+                                        "reducer": {
+                                            "params": [],
+                                            "type": "diff"
+                                        },
+                                        "type": "query"
+                                    }
+                                ],
+                                "datasource": {
+                                    "name": "Expression",
+                                    "type": "__expr__",
+                                    "uid": "__expr__"
+                                },
+                                "expression": "",
+                                "intervalMs": 1000,
+                                "maxDataPoints": 43200,
+                                "refId": "B",
+                                "type": "classic_conditions"
+                            }
+                        }
+                    ],
+                    "dashboardUid": "nginx-ingress-monitoring-dashboard",
+                    "panelId": 6,
+                    "noDataState": "NoData",
+                    "execErrState": "Error",
+                    "for": "1m",
+                    "annotations": {
+                        "__dashboardUid__": "nginx-ingress-monitoring-dashboard",
+                        "__panelId__": "6"
+                    },
+                    "isPaused": false,
+                    "notification_settings": {
+                        "receiver": "telegram-alert"
+                    }
+                }
+            ]
+        },
+        {
+            "orgId": 1,
+            "name": "latency",
+            "folder": "alerts",
+            "interval": "1m",
+            "rules": [
+                {
+                    "uid": "febhipcbutpfkd",
+                    "title": "Max Latency",
+                    "condition": "B",
+                    "data": [
+                        {
+                            "refId": "D",
+                            "relativeTimeRange": {
+                                "from": 10800,
+                                "to": 0
+                            },
+                            "datasourceUid": "debaaeilqmxa8f",
+                            "model": {
+                                "adhocFilters": [],
+                                "datasource": {
+                                    "type": "prometheus",
+                                    "uid": "debaaeilqmxa8f"
+                                },
+                                "expr": "max(rate(nginx_ingress_controller_request_duration_seconds_sum[1m])) by (ingress)",
+                                "format": "time_series",
+                                "interval": "",
+                                "intervalFactor": 2,
+                                "intervalMs": 15000,
+                                "maxDataPoints": 43200,
+                                "refId": "D"
+                            }
+                        },
+                        {
+                            "refId": "B",
+                            "relativeTimeRange": {
+                                "from": 0,
+                                "to": 0
+                            },
+                            "datasourceUid": "__expr__",
+                            "model": {
+                                "conditions": [
+                                    {
+                                        "evaluator": {
+                                            "params": [
+                                                0.1,
+                                                0.111
+                                            ],
+                                            "type": "gt"
+                                        },
+                                        "operator": {
+                                            "type": "and"
+                                        },
+                                        "query": {
+                                            "params": [
+                                                "D"
+                                            ]
+                                        },
+                                        "reducer": {
+                                            "params": [],
+                                            "type": "last"
+                                        },
+                                        "type": "query"
+                                    }
+                                ],
+                                "datasource": {
+                                    "name": "Expression",
+                                    "type": "__expr__",
+                                    "uid": "__expr__"
+                                },
+                                "expression": "",
+                                "hide": false,
+                                "intervalMs": 1000,
+                                "maxDataPoints": 43200,
+                                "refId": "B",
+                                "type": "classic_conditions"
+                            }
+                        }
+                    ],
+                    "dashboardUid": "nginx-ingress-monitoring-dashboard",
+                    "panelId": 4,
+                    "noDataState": "NoData",
+                    "execErrState": "Error",
+                    "for": "1m",
+                    "annotations": {
+                        "__dashboardUid__": "nginx-ingress-monitoring-dashboard",
+                        "__panelId__": "4",
+                        "description": "High latency",
+                        "summary": "High latency"
+                    },
+                    "isPaused": false,
+                    "notification_settings": {
+                        "receiver": "telegram-alert"
+                    }
+                }
+            ]
+        }
+    ]
+}
